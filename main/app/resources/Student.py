@@ -1,5 +1,4 @@
 from flask_restful import Resource, reqparse, request
-
 from werkzeug.security import safe_str_cmp
 from flask_jwt_extended import (
     jwt_required, create_access_token,
@@ -16,6 +15,8 @@ class Student(Resource):
     def get(self, id):
         student = StudentModel.query.get(id)
         if student:
-            return student.__dict__
+            json = student.jsonify()
+
+            return json, 200
 
         return {'message': 'Student not found'}, 404

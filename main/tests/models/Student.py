@@ -4,8 +4,6 @@ from main.app.models.Course import CourseModel
 from main.app.models.Classroom import ClassroomModel
 from main.app.models.University import UniversityModel
 
-from main.app.utils.models import save_model, delete_model
-
 
 app = create_app()
 app.app_context().push()
@@ -16,7 +14,7 @@ university_id = UniversityModel.query.filter_by(
     name='UniEvangelica').first().id
 
 student = StudentModel(
-    '2011687', 'Foo', 'Bar', 'password',
-    'email@outlook.com', course_id, classroom_id, university_id)
+    '2011688', 'Bar', 'Foo', 'password',
+    'email1@outlook.com', course_id, classroom_id, university_id)
 
-save_model(student)
+student.save()
