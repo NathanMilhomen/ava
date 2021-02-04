@@ -14,7 +14,7 @@ university_id = UniversityModel.query.filter_by(
     name='UniEvangelica').first().id
 
 student = StudentModel(
-    '2011688', 'Bar', 'Foo', 'password',
+    '2011689', 'Bar', 'Foo', 'password',
     'email1@outlook.com', course_id, classroom_id, university_id)
 
 student.save()

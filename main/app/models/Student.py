@@ -47,7 +47,7 @@ class StudentModel(db.Model):
     subjects = db.relationship(
         'SubjectModel', secondary=student_subject, backref=db.backref('student', lazy='dynamic'))
 
-    def __init__(self, id: str, first_name: str, last_name: str, password: str, email: str, course_id: int, classroom_id: int, university_id: int):
+    def __init__(self, id: str, first_name: str, last_name: str, password: str, email: str, course_id: int, classroom_id: int, university_id: int, teste: str = 'Teste'):
 
         self.id = id
         self.first_name = first_name
