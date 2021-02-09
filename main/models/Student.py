@@ -52,7 +52,7 @@ class StudentModel(db.Model):
         self.id = id
         self.first_name = first_name
         self.last_name = last_name
-        self.password = bcrypt.generate_password_hash(password).decode('utf8')
+        self.password = password
         self.email = email
         self.course_id = course_id
         self.classroom_id = classroom_id
