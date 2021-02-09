@@ -1,4 +1,4 @@
-from main.app import db
+from main import db
 
 
 class SchoolRecordModel(db.Model):

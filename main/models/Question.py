@@ -1,6 +1,6 @@
-from main.app import db
+from main import db
 
-from main.app.models import QuestionOption
+from main.models import QuestionOption
 
 
 class QuestionModel(db.Model):

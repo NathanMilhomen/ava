@@ -1,7 +1,6 @@
-from enum import unique
-from main.app import db
+from main import db
 
-from main.app.models import SchoolRecord, Quiz
+from main.models import SchoolRecord, Quiz
 
 
 class SubjectModel(db.Model):

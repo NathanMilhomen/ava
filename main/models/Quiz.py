@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from main.app import db
-from main.app.models import Question, Professor
+from main import db
+from main.models import Question, Professor
 
 quiz_question = db.Table(
     'quiz_question',

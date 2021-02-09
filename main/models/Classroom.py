@@ -1,6 +1,6 @@
-from main.app import db
+from main import db
 
-from main.app.models import Student
+from main.models import Student
 
 
 class ClassroomModel(db.Model):

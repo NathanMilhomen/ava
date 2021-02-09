@@ -1,6 +1,6 @@
-from main.app import db, bcrypt
+from main import db, bcrypt
 
-from main.app.models import Subject, Quiz
+from main.models import Subject, Quiz
 
 professor_subject = db.Table(
     'professor_subject',

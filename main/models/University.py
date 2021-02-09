@@ -1,6 +1,6 @@
-from main.app import db
+from main import db
 
-from main.app.models import Course, Student
+from main.models import Course, Student
 
 
 university_course = db.Table('university_course',

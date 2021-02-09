@@ -4,9 +4,8 @@ from flask_jwt_extended import (
     jwt_required, create_access_token,
     get_jwt_identity, get_raw_jwt
 )
-import bcrypt
 
-from main.app.models.Student import StudentModel
+from main.models.Student import StudentModel
 # from blacklist import BLACKLIST
 
 parser = reqparse.RequestParser()

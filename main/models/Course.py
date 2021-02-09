@@ -1,6 +1,6 @@
-from main.app import db
+from main import db
 
-from main.app.models import Student, Classroom, Subject
+from main.models import Student, Classroom, Subject
 
 
 course_subject = db.Table(
