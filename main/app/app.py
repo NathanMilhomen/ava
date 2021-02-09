@@ -10,6 +10,7 @@ db.session.commit()
 
 api = Api(app)
 api.add_resource(Student.Student, '/student/<string:id>')
+api.add_resource(Student.StudentRegister, '/student')
 
 # TODO: Implementar migrations
 
