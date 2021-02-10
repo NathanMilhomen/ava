@@ -21,6 +21,7 @@ class AvaModel(Model):
         session.commit()
 
     def delete(self):
+        session = object_session(self)
         session.delete(self)
         session.commit()
 

@@ -9,6 +9,15 @@ from main.models.Student import StudentModel
 # from blacklist import BLACKLIST
 
 
+class Students(Resource):
+
+    def get(self):
+        students = StudentModel.query.all()
+        students = [student.jsonify() for student in students]
+
+        return students, 200
+
+
 class Student(Resource):
 
     parser = reqparse.RequestParser()
@@ -33,16 +42,35 @@ class Student(Resource):
     def put(self, id):
 
         args = Student.parser.parse_args()
-        student = StudentModel.query.get(id)
+        try:
+            student = StudentModel.query.get(id)
 
-        if student:
-            args['password'] = bcrypt.generate_password_hash(
-                args['password']).decode('utf8') if args['password'] else None
+            if student:
+                args['password'] = bcrypt.generate_password_hash(
+                    args['password']).decode('utf8') if args['password'] else None
 
-            student.update(args)
-            return {'message': 'Student modified successfully'}, 200
+                student.update(args)
+                return {'message': 'Student modified successfully'}, 200
 
-        return {'message': 'Student not found'}, 404
+            return {'message': 'Student not found'}, 404
+
+        except Exception as e:
+            print(e)
+            return {'message': 'Something got wrong'}, 500
+
+    def delete(self, id):
+        try:
+            student = StudentModel.query.get(id)
+            if student:
+                student.delete()
+
+                return {'message': 'Student deleted successfully'}, 200
+
+            return {'message': 'Student not found'}, 404
+
+        except Exception as e:
+            print(e)
+            return {'message': 'Something got wrong'}, 500
 
 
 class StudentRegister(Resource):
@@ -65,13 +93,10 @@ class StudentRegister(Resource):
     parser.add_argument('university_id', type=int,
                         required=True, help='University identifier required')
 
-    args = parser.parse_args()
-
     def post(self):
-        print('post')
+        args = self.parser.parse_args()
+
         try:
-            args = StudentRegister.args
-            print(args)
             student = StudentModel.query.get(args['id'])
 
             if not student:
