@@ -9,3 +9,4 @@ def add_resources(app):
     api.add_resource(Student.Students, '/students')
     api.add_resource(Student.Student, '/student/<string:id>')
     api.add_resource(Student.StudentRegister, '/student')
+    api.add_resource(Student.StudentLogin, '/student/login')

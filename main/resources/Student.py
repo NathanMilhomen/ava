@@ -8,6 +8,8 @@ from main import bcrypt
 from main.models.Student import StudentModel
 # from blacklist import BLACKLIST
 
+# TODO: Implementar STUDENT login, logout
+
 
 class Students(Resource):
 
@@ -16,6 +18,40 @@ class Students(Resource):
         students = [student.jsonify() for student in students]
 
         return students, 200
+
+
+class StudentLogin(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('id', type=str, required=True,
+                        help='Student identifier requireed')
+    parser.add_argument('password', type=str, required=True,
+                        help='Student password required')
+
+    def post(self):
+        args = self.parser.parse_args()
+
+        try:
+            student = StudentModel.query.get(args['id'])
+
+            if student:
+                password = student.password
+                correct = bcrypt.check_password_hash(
+                    password, args['password'])
+
+                if correct:
+                    acess_token = create_access_token(identity=student.id)
+                    return {
+                        'message': 'Logged successfully',
+                        'acess_token': acess_token
+                    }
+
+                return {'message': 'Invalid credencials'}
+
+            return {'message': 'Invalid credencials'}
+
+        except Exception as e:
+            print(e)
+            return {'message': 'Something got wrong'}
 
 
 class Student(Resource):
@@ -74,7 +110,7 @@ class Student(Resource):
 
 
 class StudentRegister(Resource):
-    # TODO: testar sem passar todos argumentos
+
     parser = reqparse.RequestParser()
     parser.add_argument('id', type=str, required=True,
                         help='Student identifier required')
