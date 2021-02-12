@@ -27,3 +27,6 @@ class SubjectModel(db.Model):
         self. workload = workload
         self.number_of_classes = number_of_classes
         self.requirement_id = requirement_id
+
+    def __repr__(self):
+        return f'<SubjectModel {self.name}>'

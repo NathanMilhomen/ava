@@ -11,6 +11,14 @@ university_course = db.Table('university_course',
                                  'course.id'), primary_key=True)
                              )
 
+university_professor = db.Table('university_professor',
+                                db.Column('university_id', db.Integer, db.ForeignKey(
+                                    'university.id'), primary_key=True),
+
+                                db.Column('professor_id', db.String(11), db.ForeignKey(
+                                    'professor.id'), primary_key=True)
+                                )
+
 
 class UniversityModel(db.Model):
 
@@ -22,6 +30,8 @@ class UniversityModel(db.Model):
     # Relationships
     students = db.relationship(
         'StudentModel', backref='university', lazy='select')
+    professors = db.relationship(
+        'ProfessorModel', backref='university', lazy='select')
     courses = db.relationship('CourseModel', secondary=university_course, lazy='select',
                               backref=db.backref('course', lazy='dynamic'))
 
