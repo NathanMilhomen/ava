@@ -30,8 +30,9 @@ class UniversityModel(db.Model):
     # Relationships
     students = db.relationship(
         'StudentModel', backref='university', lazy='select')
-    professors = db.relationship(
-        'ProfessorModel', backref='university', lazy='select')
+    professors = db.relationship('ProfessorModel', secondary=university_professor,
+                                 backref=db.backref('university', lazy='dynamic'))
+
     courses = db.relationship('CourseModel', secondary=university_course, lazy='select',
                               backref=db.backref('course', lazy='dynamic'))
 

@@ -14,3 +14,6 @@ class BlacklistedToken(db.Model):
         self.jti = jti
         self.identity = identity
         self.expires = expires
+
+    def __repr__(self):
+        return f'<Token {self.jti}>'

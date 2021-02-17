@@ -24,7 +24,7 @@ manager.add_command('db', MigrateCommand)
 def run():
 
     add_resources(app)
-    app.run(debug=True)
+    app.run()
 
 
 if __name__ == '__main__':

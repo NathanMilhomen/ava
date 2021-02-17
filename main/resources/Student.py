@@ -1,17 +1,13 @@
 from datetime import datetime, timezone
 
-from flask_restful import Resource, reqparse, request
-from werkzeug.security import safe_str_cmp
+from flask_restful import Resource, reqparse
+
 from flask_jwt_extended import (
-    jwt_required, create_access_token,
-    get_jwt_identity, get_raw_jwt
+    jwt_required, create_access_token, get_raw_jwt
 )
 from main import bcrypt
 from main.models.Student import StudentModel
 from main.models.BlacklistedToken import BlacklistedToken
-# from blacklist import BLACKLIST
-
-# TODO: Implementar STUDENT login, logout
 
 
 class StudentRegister(Resource):
@@ -100,10 +96,13 @@ class Students(Resource):
 
     @jwt_required
     def get(self):
-        students = StudentModel.query.all()
-        students = [student.jsonify() for student in students]
 
-        return students, 200
+        students = StudentModel.query.all()
+        if students:
+            students = [student.jsonify() for student in students]
+            return students, 200
+
+        return {'message': 'There is not students registered'}, 404
 
 
 class Student(Resource):
